@@ -1,0 +1,22 @@
+# OS Generated Files
+.DS_Store
+Thumbs.db
+
+# Other version control stuff
+.svn
+
+# Backup files
+*~
+
+# PyCharm CE Project cruft
+.idea
+
+# Python compiled bytecode
+*.pyc
+
+# Python py.test cache
+.cache
+
+# Python coverage
+htmlcov
+.coverage*

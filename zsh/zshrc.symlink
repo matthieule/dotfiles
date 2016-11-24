@@ -1,0 +1,71 @@
+export DOTFILES=$HOME/dotfiles
+export ZSH=$DOTFILES/zsh
+
+# History setting 
+setopt hist_ignore_all_dups inc_append_history
+HISTFILE=~/.zhistory
+HISTSIZE=4096
+SAVEHIST=4096
+
+export TERM=xterm-256color-italic
+
+# SHELL style
+BASE16_SHELL="$DOTFILES/.config/scripts/base16-tomorrow-night.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+# Tmuxifier
+#[ -z "$TMUX" ] && export TERM=xterm-256color-italic
+
+export PATH="$DOTFILES/tmuxifier/bin:$PATH"
+[[ -d $DOTFILES/tmuxifier ]] && eval "$($DOTFILES/tmuxifier/bin/tmuxifier init -)"
+
+export TMUXIFIER_LAYOUT_PATH="$DOTFILES/tmuxifier_layout"
+
+# define the code directory
+# This is where my code exists and where I want the `c` autocomplete to work from exclusively
+if [[ -d ~/code ]]; then
+    export CODE_DIR=~/Documents/Dev/
+fi
+
+# source all .zsh files inside of the zsh/ directory
+for config ($ZSH/**/*.zsh) source $config
+
+# git prompt
+export GIT_PS1_SHOWUPSTREAM="auto"
+source $DOTFILES/git/git-prompt.sh
+setopt PROMPT_SUBST ; 
+PS1='[%n@%m %c$(__git_ps1 " (%s)")]\$ '
+# precmd () { __git_ps1 "%n" ":%~$ " "|%s" }
+precmd () { __git_ps1 '%F{51}%~%f' '%F{red}›%f ' '|`git_dirty` %s' }
+
+#export PROMPT='%(?.%F{205}.%F{red})›%f '
+#export RPROMPT='`git_dirty`%F{241}$vcs_info_msg_0_%f `git_arrows``suspended_jobs`'
+
+# initialize autocomplete
+autoload -U compinit add-zsh-hook
+compinit
+
+export EDITOR='nvim'
+
+export PATH=/usr/local/bin:$PATH
+
+# adding path directory for custom scripts
+export PATH=$DOTFILES/bin:$PATH
+
+#[ -z "$TMUX" ] && export TERM=xterm-256color-italic
+
+# Instal command-line fuzzy finder
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [ -z ${DOTFILES_LOADED+x} ]; then
+    #install zsh-syntax-highlighting
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    #install zsh autosuggestions
+    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+# Launch a tmux session
+
+tmux attach-session -t default || tmux new-session -s default
+
+DOTFILES_LOADED=1
