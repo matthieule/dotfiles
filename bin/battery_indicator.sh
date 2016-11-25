@@ -4,23 +4,26 @@
 HEART="▮"
 
 if [[ `uname` == 'Linux' ]]; then
-  current_charge=$(cat /proc/acpi/battery/BAT1/state | grep 'remaining capacity' | awk '{print $3}')
-  total_charge=$(cat /proc/acpi/battery/BAT1/info | grep 'last full capacity' | awk '{print $4}')
+	current_charge=$(cat /proc/acpi/battery/BAT1/state | grep 'remaining capacity' | awk '{print $3}')
+	total_charge=$(cat /proc/acpi/battery/BAT1/info | grep 'last full capacity' | awk '{print $4}')
+	# When I am on linux, I am on a server and I don't care about the battery
+	echo ""
 else
-  battery_info=`ioreg -rc AppleSmartBattery`
-  current_charge=$(echo $battery_info | grep -o '"CurrentCapacity" = [0-9]\+' | awk '{print $3}')
-  total_charge=$(echo $battery_info | grep -o '"MaxCapacity" = [0-9]\+' | awk '{print $3}')
-fi
+	battery_info=`ioreg -rc AppleSmartBattery`
+	current_charge=$(echo $battery_info | grep -o '"CurrentCapacity" = [0-9]\+' | awk '{print $3}')
+	total_charge=$(echo $battery_info | grep -o '"MaxCapacity" = [0-9]\+' | awk '{print $3}')
 
-charged_slots=$(echo "((($current_charge/$total_charge)*10)/2)+1" | bc -l | cut -d '.' -f 1)
-if [[ $charged_slots -gt 5 ]]; then
-  charged_slots=5
-fi
 
-echo -n '#[fg=colour51]'
-for i in `seq 1 $charged_slots`; do echo -n "$HEART"; done
+	charged_slots=$(echo "((($current_charge/$total_charge)*10)/2)+1" | bc -l | cut -d '.' -f 1)
+	if [[ $charged_slots -gt 5 ]]; then
+		charged_slots=5
+	fi
 
-if [[ $charged_slots -lt 5 ]]; then
-  echo -n '#[fg=colour241]'
-  for i in `seq 1 $(echo "5-$charged_slots" | bc)`; do echo -n "$HEART"; done
-fi
+	echo -n '#[fg=colour51]'
+	for i in `seq 1 $charged_slots`; do echo -n "$HEART"; done
+
+	if [[ $charged_slots -lt 5 ]]; then
+		echo -n '#[fg=colour241]'
+		for i in `seq 1 $(echo "5-$charged_slots" | bc)`; do echo -n "$HEART"; done
+	fi
+fi	

@@ -1,10 +1,12 @@
 #set -g default-command "login-shell"
 
 # tmux display things in 256 colors
-set -g default-terminal "tmux-256color-italic"
+if-shell "uname | grep -q Darwin" "set -g default-terminal 'tmux-256color-italic'"
+if-shell "uname | grep -q Linux" "set -g default-terminal 'screen-256color'"
 
 #  enable terminal compability
-set-option -ga terminal-overrides ",tmux-256color-italic:Tc"
+if-shell "uname | grep -q Darwin" "set-option -ga terminal-overrides ',tmux-256color-italic:Tc'"
+if-shell "uname | grep -q Linux" "set-option -ga terminal-overrides 'screen-256color:Tc'"
 
 # Rather than constraining window size to the maximum size of any client
 # connected to the *session*, constrain window size to the maximum size of any
@@ -13,6 +15,8 @@ setw -g aggressive-resize on
 
 set-option -g set-titles on
 set-option -g set-titles-string "#T - #W"<Paste>
+
+set-option -g repeat-time 100
 
 # enable mouse support for switching panes/windows
 # setw -g mouse on

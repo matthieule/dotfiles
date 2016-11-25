@@ -7,7 +7,14 @@ HISTFILE=~/.zhistory
 HISTSIZE=4096
 SAVEHIST=4096
 
-export TERM=xterm-256color-italic
+if [[ $(uname) == "Linux" ]]; then
+    export TERM=xterm-256color
+elif [[ $(uname) == "Darwin" ]]; then
+    export TERM=xterm-256color-italic
+else
+    echo "Unexpected uname:" $(uname)
+    exit 1
+fi
 
 # SHELL style
 BASE16_SHELL="$DOTFILES/.config/scripts/base16-tomorrow-night.sh"
@@ -36,7 +43,7 @@ source $DOTFILES/git/git-prompt.sh
 setopt PROMPT_SUBST ; 
 PS1='[%n@%m %c$(__git_ps1 " (%s)")]\$ '
 # precmd () { __git_ps1 "%n" ":%~$ " "|%s" }
-precmd () { __git_ps1 '%F{51}%~%f' '%F{red}›%f ' '|`git_dirty` %s' }
+precmd () { __git_ps1 '%m|%F{51}%~%f' '%F{red}›%f ' '|`git_dirty` %s' }
 
 #export PROMPT='%(?.%F{205}.%F{red})›%f '
 #export RPROMPT='`git_dirty`%F{241}$vcs_info_msg_0_%f `git_arrows``suspended_jobs`'
@@ -52,6 +59,15 @@ export PATH=/usr/local/bin:$PATH
 # adding path directory for custom scripts
 export PATH=$DOTFILES/bin:$PATH
 
+# Bind arrows to history search
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
 #[ -z "$TMUX" ] && export TERM=xterm-256color-italic
 
 # Instal command-line fuzzy finder
@@ -59,13 +75,13 @@ export PATH=$DOTFILES/bin:$PATH
 
 if [ -z ${DOTFILES_LOADED+x} ]; then
     #install zsh-syntax-highlighting
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source $DOTFILES/zsh_highlight/zsh-syntax-highlighting.zsh
     #install zsh autosuggestions
-    source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    source $DOTFILES/zsh_autocomplete/zsh-autosuggestions.zsh
 fi
 
 # Launch a tmux session
 
-tmux attach-session -t default || tmux new-session -s default
+# tmux attach-session -t default || tmux new-session -s default
 
 DOTFILES_LOADED=1

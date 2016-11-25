@@ -2,9 +2,11 @@ source ~/.config/nvim/plugins.vim
 
 " python stuff
 let g:python_host_prog = '/Users/matthieule/anaconda3/bin/python'
- "let g:python3_host_prog = '/usr/local/bin/python3'
-let g:python3_host_prog = '/Users/matthieule/anaconda3/envs/vision/bin/python3'
+let g:python3_host_prog = '/usr/local/bin/python3'
+"let g:python3_host_prog = '/Users/matthieule/anaconda3/envs/vision/bin/python3'
 runtime! plugin/python_setup.vim
+let python_highlight_all=1
+syntax on
 
 " Section General {{{
 
@@ -12,7 +14,7 @@ set nocompatible            " not compatible with vi
 set autoread                " detect when a file is changed
 
 set history=1000            " change history to 1000
-set textwidth=120
+set textwidth=79
 
 " }}}
 
@@ -23,6 +25,10 @@ let base16colorspace=256
 set background=dark
 colorscheme base16-tomorrow-night
 
+"airline theme
+let g:airline_theme='base16'
+let g:solarized_base16 = 1
+
 " make the highlighting of tabs and other non-text less annoying
 highlight SpecialKey ctermbg=none ctermfg=8
 highlight NonText ctermbg=none ctermfg=8
@@ -31,8 +37,8 @@ highlight NonText ctermbg=none ctermfg=8
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
 
-set number                  " show line numbers
-
+" set number                  " show line numbers
+set ruler                   " show the file status at the bottom
 set wrap                    " turn on line wrapping
 set wrapmargin=8            " wrap lines when coming within n characters from side
 set linebreak               " set soft wrapping
@@ -54,14 +60,19 @@ set shiftround              " round indent to a multiple of 'shiftwidth'
 set completeopt+=longest
 
 " code folding settings
-set foldmethod=syntax       " fold based on indent
-set foldnestmax=10          " deepest fold is 10 levels
+" set foldmethod=indent       " fold based on indent
+" set foldnestmax=10          " deepest fold is 10 levels
 set nofoldenable            " don't fold by default
-set foldlevel=1
+" set foldlevel=1
 
-"set clipboard+=unnamedplus
+" preview folded classes and functions docstrings
+" let g:SimpylFold_docstring_preview = 1
+" don't fold docstring
+" let g:SimpylFold_fold_docstring = 0
 
-set laststatus=2            " show the satus line all the time
+set clipboard+=unnamedplus
+
+" set laststatus=2            " show the satus line all the time
 "set so=7                    " set 7 lines to the cursors - when moving vertical
 set wildmenu                " enhanced command line completion
 "set hidden                  " current buffer can be put into background
@@ -80,7 +91,7 @@ set hlsearch                " highlight search results
 set incsearch               " set incremental search, like modern browsers
 set nolazyredraw            " don't redraw while executing macros
 
-"set magic                   " Set magic on, for regex
+set magic                   " Set magic on, for regex
 
 set showmatch               " show matching braces
 set mat=2                   " how many tenths of a second to blink
@@ -91,6 +102,17 @@ if has('mouse')
 	" set ttymouse=xterm2
 endif
 
+" replace currently selected text with default register
+" without yanking it
+vnoremap p "_dP
+
+" Disable arrow keys to break bad habit
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 " vim-tmux-navigator
 let g:tmux_navigator_no_mappings = 1
 " Use <BS> so it works on neovim
@@ -99,5 +121,12 @@ nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+
+" CtrlP
+
+set runtimepath^=~/dotfiles/config/nvim/ctrlp.vim
+
+" Make p put stuff in a blackhole registry so I can paste stuff several times
+vnoremap <leader>p "_dP
 
 "i" }}}

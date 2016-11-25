@@ -4,3 +4,12 @@
 [submodule ".config"]
 	path = .config
 	url = https://github.com/chriskempson/base16-shell.git
+[submodule "zsh_autocomplete"]
+	path = zsh_autocomplete
+	url = git://github.com/zsh-users/zsh-autosuggestions
+[submodule "zsh_highlight"]
+	path = zsh_highlight
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "config/nvim/ctrlp.vim"]
+	path = config/nvim/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim.git
