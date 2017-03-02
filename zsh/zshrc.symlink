@@ -41,9 +41,14 @@ for config ($ZSH/**/*.zsh) source $config
 export GIT_PS1_SHOWUPSTREAM="auto"
 source $DOTFILES/git/git-prompt.sh
 setopt PROMPT_SUBST ; 
+# Determine active Python virtualenv details.
 PS1='[%n@%m %c$(__git_ps1 " (%s)")]\$ '
-# precmd () { __git_ps1 "%n" ":%~$ " "|%s" }
-precmd () { __git_ps1 '%m|%F{51}%~%f' '%F{red}›%f ' '|`git_dirty` %s' }
+function set_virtualenv () {
+  if ! test -z "$CONDA_DEFAULT_ENV" ; then
+	  echo "%F{red}${CONDA_DEFAULT_ENV}%f | "
+  fi
+}
+precmd () { __git_ps1 '`set_virtualenv`%m|%F{51}%~%f' '%F{red}›%f ' '|`git_dirty` %s' }
 
 #export PROMPT='%(?.%F{205}.%F{red})›%f '
 #export RPROMPT='`git_dirty`%F{241}$vcs_info_msg_0_%f `git_arrows``suspended_jobs`'
