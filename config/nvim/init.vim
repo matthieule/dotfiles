@@ -4,8 +4,12 @@ source ~/.config/nvim/plugins.vim
 " correspond to the python used when installing neovim with
 " pip2 install neovim
 " pip3 install neovim
-let g:python_host_prog = '/usr/local/bin/python2.7'
-let g:python3_host_prog = '/usr/local/bin/python3'
+" or conda install neovim in all the virtual environment
+" let g:python_host_prog = '/usr/local/bin/python2.7'
+" let g:python3_host_prog = '/usr/local/bin/python3'
+
+let g:virtualenv_auto_activate = 1
+
 let python_highlight_all=1
 syntax on
 
