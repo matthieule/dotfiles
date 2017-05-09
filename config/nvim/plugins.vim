@@ -34,7 +34,7 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'tmhedberg/SimpylFold'
 
 " Have vim check the syntax on each save
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 
 " Check PEP8
 " Plug 'nvie/vim-flake8'

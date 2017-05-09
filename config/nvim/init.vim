@@ -1,10 +1,11 @@
 source ~/.config/nvim/plugins.vim
 
-" python stuff
-let g:python_host_prog = '/Users/matthieule/anaconda3/bin/python'
+" python stuff: these path must be working for the Jedi vim plugin. They
+" correspond to the python used when installing neovim with
+" pip2 install neovim
+" pip3 install neovim
+let g:python_host_prog = '/usr/local/bin/python2.7'
 let g:python3_host_prog = '/usr/local/bin/python3'
-"let g:python3_host_prog = '/Users/matthieule/anaconda3/envs/vision/bin/python3'
-runtime! plugin/python_setup.vim
 let python_highlight_all=1
 syntax on
 
