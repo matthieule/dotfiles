@@ -90,9 +90,3 @@ fi
 # tmux attach-session -t default || tmux new-session -s default
 
 DOTFILES_LOADED=1
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/matthieule/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/matthieule/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/matthieule/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/matthieule/google-cloud-sdk/completion.zsh.inc'; fi
