@@ -19,8 +19,8 @@ set nocompatible            " not compatible with vi
 set autoread                " detect when a file is changed
 
 set history=1000            " change history to 1000
-set textwidth=79
-
+"set textwidth=79
+set colorcolumn=80
 " }}}
 
 " Section User Interface {{{
