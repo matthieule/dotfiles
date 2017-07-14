@@ -37,6 +37,7 @@ fi
 # source all .zsh files inside of the zsh/ directory
 for config ($ZSH/**/*.zsh) source $config
 
+export LC_CTYPE=en_US.UTF-8
 # git prompt
 export GIT_PS1_SHOWUPSTREAM="auto"
 source $DOTFILES/git/git-prompt.sh
