@@ -72,7 +72,7 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
-
+bindkey "\e[3~" delete-char # such that the forward delete key works
 #[ -z "$TMUX" ] && export TERM=xterm-256color-italic
 
 # Instal command-line fuzzy finder
