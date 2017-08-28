@@ -97,3 +97,5 @@ if [ -f '/Users/matthieule/google-cloud-sdk/path.zsh.inc' ]; then source '/Users
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/matthieule/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/matthieule/google-cloud-sdk/completion.zsh.inc'; fi
+
+alias ctags="`brew --prefix`/bin/ctags"
