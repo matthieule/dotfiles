@@ -129,7 +129,7 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
 " CtrlP
 
-set runtimepath^=~/dotfiles/config/nvim/ctrlp.vim
+set runtimepath^=~/Documents/repos/dotfiles/config/nvim/ctrlp.vim
 
 " Make p put stuff in a blackhole registry so I can paste stuff several times
 vnoremap <leader>p "_dP

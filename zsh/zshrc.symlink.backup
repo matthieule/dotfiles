@@ -1,4 +1,4 @@
-export DOTFILES=$HOME/dotfiles
+export DOTFILES=$HOME/Documents/repos/dotfiles
 export ZSH=$DOTFILES/zsh
 
 # History setting 

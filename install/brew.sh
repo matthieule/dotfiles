@@ -16,8 +16,11 @@ brew install diff-so-fancy
 brew install zsh-syntax-highlighting
 brew install zsh-autosuggestions
 brew install tree
+brew install reattach-to-user-namespace
+brew install fzf
 
 # install neovim
+brew install neovim
 brew install neovim/neovim/neovim
 
 exit 0
