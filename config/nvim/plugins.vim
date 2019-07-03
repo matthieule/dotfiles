@@ -4,17 +4,16 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 " colorschemes
-" Plug 'dracula/vim'
 Plug 'joshdick/onedark.vim'
 Plug 'chriskempson/base16-vim'
+" New plug
+Plug 'tomasiser/vim-code-dark'
 
 " Powerline for useful status bar in vim
 " Plug 'Lokaltog/powerline'
 
 " file drawer
-Plug 'scrooloose/nerdtree' 
-"Plug 'Xuyuanp/nerdtree-git-plugin' 
-"Plug 'ryanoasis/vim-devicons'
+Plug 'scrooloose/nerdtree'  
 
 " fuzzy file finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -28,16 +27,24 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 
 " Python
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-Plug 'tmhedberg/SimpylFold'
+" Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+" Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
+" Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+" Plug 'tmhedberg/SimpylFold'
+Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+Plug 'zchee/deoplete-jedi', {'for': 'python'}
 
 " Have vim check the syntax on each save
 " Plug 'scrooloose/syntastic'
 
 " Check PEP8
 " Plug 'nvie/vim-flake8'
+
+" Code checker
+Plug 'neomake/neomake'
+
+" Highlight the yanked area
+Plug 'machakann/vim-highlightedyank'
 
 " styles
 Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
